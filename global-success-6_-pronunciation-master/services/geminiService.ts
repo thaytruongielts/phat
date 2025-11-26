@@ -1,6 +1,6 @@
 import { GoogleGenAI, Modality } from "@google/genai";
 
-const API_KEY = process.env.API_KEY || '';
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
 
 // Decode audio helper
 const decode = (base64: string) => {
@@ -15,12 +15,12 @@ const decode = (base64: string) => {
 
 // Main playback function
 export const playTextToSpeech = async (text: string, context: AudioContext): Promise<void> => {
-  if (!API_KEY) {
-    throw new Error("Missing API Key. Please add API_KEY to environment variables.");
+  if (!GEMINI_API_KEY) {
+    throw new Error("Missing API Key. Please add GEMINI_API_KEY to environment variables.");
   }
 
   try {
-    const ai = new GoogleGenAI({ apiKey: API_KEY });
+    const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
     
     // Using the specific model for TTS as per guidance
     const response = await ai.models.generateContent({
